@@ -1,58 +1,74 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <v-container fluid>
+    <v-row class="justify-center text-center">
+      <v-col cols="12">
+        <v-avatar size="300" color="grey">
+          <v-img
+            :src="require('../assets/profile2.png')"
+            class="my-3"
+            contain
+            height="300"/>
+        </v-avatar>
+      </v-col>
+      <v-col cols="12">
+        <p :class="isXs ? 'display-1' : 'display-2'" class="font-weight-bold mb-3">Yeonwoo Choi</p>
+        <p :class="isXs ? 'title' : 'headline'" class="font-weight-regular cyan--text">Coder</p>
+      </v-col>
+      <v-col cols="12">
+        <p :class="isXs ? 'display-2' : 'display-3'" class="grey--text font-weight-light">"Latte is horse"</p>
+      </v-col>
+      <v-col cols="12">
+        <v-row class="justify-end align-center" v-for="item in information" :key="item.icon">
+          <v-col cols="4" lg="6" class="text-end">
+            <v-icon :large="!isXs" class="pr-5" color="cyan">{{ item.icon }}</v-icon>
+          </v-col>
+          <v-col cols="8" lg="6" class="text-start">
+            <p :class="isXs ? 'body-1' : 'title'" class="title py-0 my-0">{{ item.text }}</p>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+  data: () => ({
+    information: [
+      {
+        icon: 'fa fa-calendar-alt',
+        text: '7st, June 1996 '
+      },
+      {
+        icon: 'fa fa-phone-alt',
+        text: '+82 10-000-0000'
+      },
+      {
+        icon: 'fa fa-school',
+        text: 'Korea University'
+      },
+      {
+        icon: 'fab fa-google',
+        text: 'chldusdn20@google.com'
+      },
+      {
+        icon: 'fab fa-github',
+        text: 'Github',
+        link: 'https://github.com/yeonwoochoi'
+      },
+      {
+        icon: 'fa fa-users',
+        text: 'Team ourHours'
+      }
+    ]
+  }),
+
+  computed: {
+    isXs: function () {
+      return this.$vuetify.breakpoint.xs
+    }
+  }
+};
+</script>
